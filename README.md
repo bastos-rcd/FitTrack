@@ -1,6 +1,6 @@
 # FitTrack
 
-**FitTrack** is an open-source project designed to simplify the process of tracking your fitness progress (calories, programs, etc.). It is a project that consists in using _Apple Shortcuts_ to automate the process of tracking your fitness progress. This project fully integrates with _Apple Health_ (to store the data) and _Open Food Facts_ (to get the nutritional information of the food you eat).
+**FitTrack** is an open-source project designed to simplify the process of tracking your fitness progress (calories, programs, etc.). It is a project that consists in using _Apple Shortcuts_ to automate the process of tracking your fitness progress. This project fully integrates with _Apple Health_ (to store the data) and _JSON file_ (to get the nutritional information of the food you eat).
 
 ## Features
 
