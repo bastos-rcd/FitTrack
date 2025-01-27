@@ -11,7 +11,8 @@
 
 1. Install the _Shortcuts_ app on your iPhone.
 2. Read the [documentation](/docs) to understand how to create your own shortcuts.
-3. Run the shortcuts you created to track your fitness progress.
+3. Go to [fit-track-calculator.web.app](https://fit-track-calculator.web.app) to calculate the nutritional information of the food you eat.
+4. Run the shortcuts you created to track your fitness progress.
 
 ## Stack
 

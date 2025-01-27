@@ -1,0 +1,10 @@
+.DS_Store
+
+node_modules
+.next/
+out/
+build/
+.env*
+.vercel
+package-lock.json
+.firebase/
