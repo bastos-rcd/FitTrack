@@ -1,12 +1,5 @@
 import { create } from 'zustand';
-
-interface Food {
-    name: string;
-    calories: number;
-    proteins: number;
-    carbs: number;
-    fats: number;
-}
+import { Food } from '@/models/food';
 
 interface MealStore {
     meal: Food[];
