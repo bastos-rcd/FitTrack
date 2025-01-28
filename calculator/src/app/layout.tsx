@@ -16,7 +16,9 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/icon.png" />
       </head>
-      <body className="bg-blue-200 w-screen h-screen">{children}</body>
+      <body className="w-screen h-screen flex flex-col items-center justify-center bg-sky-100 text-black ">
+        {children}
+      </body>
     </html>
   );
 }
