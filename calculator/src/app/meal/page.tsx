@@ -10,7 +10,7 @@ const MealPage = () => {
   const router = useRouter();
 
   const { addFood } = useMealStore();
-  const { food, fetchFood, isLoading } = useFoodStore();
+  const { food, fetchFood } = useFoodStore();
 
   const [barcode, setBarCode] = useState<number | "">("");
   const [portion, setPortion] = useState<number | "">("");
