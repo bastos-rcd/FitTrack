@@ -17,10 +17,10 @@ export class Food {
 
     portion(servingSize: number) {
         return {
-            totalCalories: this.calories * (servingSize / 100),
-            totalProteins: this.proteins * (servingSize / 100),
-            totalCarbs: this.carbs * (servingSize / 100),
-            totalFats: this.fats * (servingSize / 100),
+            calories: parseFloat((this.calories * (servingSize / 100)).toFixed(2)),
+            proteins: parseFloat((this.proteins * (servingSize / 100)).toFixed(2)),
+            carbs: parseFloat((this.carbs * (servingSize / 100)).toFixed(2)),
+            fats: parseFloat((this.fats * (servingSize / 100)).toFixed(2))
         };
     }
 }
