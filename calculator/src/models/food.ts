@@ -1,11 +1,13 @@
 export class Food {
+    barcode: string;
     name: string;
     calories: number;
     proteins: number;
     carbs: number;
     fats: number;
 
-    constructor(name: string, calories: number, proteins: number, carbs: number, fats: number) {
+    constructor(barcode: string, name: string, calories: number, proteins: number, carbs: number, fats: number) {
+        this.barcode = barcode;
         this.name = name;
         this.calories = calories;
         this.proteins = proteins;
