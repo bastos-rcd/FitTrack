@@ -1,11 +1,11 @@
 # FitTrack
 
-**FitTrack** is an open-source project designed to simplify the process of tracking your fitness progress (calories, programs, etc.). It is a project that consists in using _Apple Shortcuts_ to automate the process of tracking your fitness progress. This project fully integrates with _Apple Health_ (to store the data) and _Open Food Facts API_ (to get the nutritional information of the food you eat).
+**FitTrack** is an project designed to simplify the process of tracking your fitness progress (calories, programs, etc.). It is a project that consists in using _Apple Shortcuts_ to automate the process of tracking your fitness progress. This project fully integrates with _Apple Health_ (to store the data) and _Open Food Facts API_ (to get the nutritional information of the food you eat).
 
 ## Getting Started
 
 1. Install the _Shortcuts_ app on your iPhone.
-2. Read the [documentation](/docs) to understand how to create your own shortcuts.
+2. Create your own shortcuts.
 3. Go to [fit-track-calculator.web.app](https://fit-track-calculator.web.app) to calculate the nutritional information of the food you eat.
 4. Run the shortcuts you created to track your fitness progress.
 
