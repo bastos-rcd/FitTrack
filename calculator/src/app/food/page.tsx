@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 import { Food } from "@/models/food";
-import { getFoods } from "@/services/foodService";
+import { getFoods, deleteFood } from "@/services/foodService";
 
 const FoodPage = () => {
   const [foods, setFoods] = useState<Food[]>([]);
@@ -17,6 +17,10 @@ const FoodPage = () => {
 
     fetchFoods();
   });
+
+  const onDeleteFood = (foodName: string) => {
+    deleteFood(foodName);
+  };
 
   return (
     <div className="w-full md:w-1/4 h-full flex flex-col items-center">
@@ -39,9 +43,13 @@ const FoodPage = () => {
           >
             <div className="w-full flex flex-row items-center gap-x-2">
               <p className="w-full text-center font-bold">{food.getName()}</p>
-              <Link href="#" className="p-2 rounded-xl bg-rose-300">
+
+              <button
+                onClick={() => onDeleteFood(food.getName())}
+                className="p-2 rounded-xl bg-rose-300"
+              >
                 <img src="/delete.png" className="w-6" />
-              </Link>
+              </button>
             </div>
             <p>{food.getCalories()} kcal</p>
             <div className="w-full flex flex-row justify-around">
