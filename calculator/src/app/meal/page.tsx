@@ -1,6 +1,5 @@
 "use client";
 
-import useFoodStore from "@/store/foodStore";
 import useMealStore from "@/store/mealStore";
 import { Food } from "@/models/food";
 import { useState, useEffect } from "react";
@@ -10,7 +9,6 @@ const MealPage = () => {
   const router = useRouter();
 
   const { addFood } = useMealStore();
-  const { food, fetchFood } = useFoodStore();
 
   const [barcode, setBarCode] = useState<number | "">("");
   const [portion, setPortion] = useState<number | "">("");
@@ -18,7 +16,7 @@ const MealPage = () => {
 
   const onSearchFood = async (e: React.FormEvent) => {
     e.preventDefault();
-    await fetchFood(barcode.toString());
+    // await fetchFood(barcode.toString());
   };
 
   useEffect(() => {
