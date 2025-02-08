@@ -9,7 +9,7 @@ export default async function getFoodList() {
         const foods: Food[] = [];
         querySnapshot.forEach((doc) => {
             const data = doc.data();
-            foods.push(new Food(doc.id, data.name, data.calories, data.proteins, data.carbs, data.fats));
+            foods.push(new Food(data.name, data.calories, data.proteins, data.carbs, data.fats));
         });
     } catch (error) {
 
