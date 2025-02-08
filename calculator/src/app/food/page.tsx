@@ -39,14 +39,8 @@ const FoodPage = () => {
           >
             <div className="w-full flex flex-row items-center gap-x-2">
               <p className="w-full text-center font-bold">{food.getName()}</p>
-              <Link
-                href={`/food/${food.getName()}`}
-                className="p-2 rounded-xl bg-green-300"
-              >
-                <img src="/edit.png" className="w-8" />
-              </Link>
               <Link href="#" className="p-2 rounded-xl bg-rose-300">
-                <img src="/delete.png" className="w-8" />
+                <img src="/delete.png" className="w-6" />
               </Link>
             </div>
             <p>{food.getCalories()} kcal</p>

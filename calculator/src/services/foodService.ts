@@ -1,5 +1,5 @@
 import { db } from '../../firebaseConfig';
-import { addDoc, collection, getDocs, updateDoc } from 'firebase/firestore'
+import { addDoc, collection, getDocs } from 'firebase/firestore'
 
 import { Food } from '@/models/food';
 
@@ -51,25 +51,5 @@ export async function createFood(food: Food): Promise<void> {
         });
     } catch (error) {
         console.error('Error creating food: ', error);
-    }
-}
-
-export async function updateFood(foodToUpdate: string, food: Food): Promise<void> {
-    try {
-        const querySnapshot = await getDocs(collection(db, 'foods'));
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            if (data.name === foodToUpdate) {
-                updateDoc(doc.ref, {
-                    name: food.getName(),
-                    calories: food.getCalories(),
-                    proteins: food.getProteins(),
-                    carbs: food.getCarbs(),
-                    fats: food.getFats()
-                });
-            }
-        });
-    } catch (error) {
-        console.error('Error updating food: ', error);
     }
 }
