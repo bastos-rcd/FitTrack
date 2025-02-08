@@ -1,9 +1,9 @@
 import { db } from '../../firebaseConfig';
-import { collection, getDocs } from 'firebase/firestore'
+import { addDoc, collection, getDocs } from 'firebase/firestore'
 
 import { Food } from '@/models/food';
 
-export default async function getFoods(): Promise<Food[]> {
+export async function getFoods(): Promise<Food[]> {
     try {
         const foods: Food[] = [];
 
@@ -19,5 +19,19 @@ export default async function getFoods(): Promise<Food[]> {
     } catch (error) {
         console.error('Error getting food list: ', error);
         return [];
+    }
+}
+
+export async function createFood(food: Food): Promise<void> {
+    try {
+        await addDoc(collection(db, 'foods'), {
+            name: food.getName(),
+            calories: food.getCalories(),
+            proteins: food.getProteins(),
+            carbs: food.getCarbs(),
+            fats: food.getFats()
+        });
+    } catch (error) {
+        console.error('Error creating food: ', error);
     }
 }

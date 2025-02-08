@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import useMealStore from "@/store/mealStore";
 import { Food } from "@/models/food";
-import getFoods from "@/services/foodService";
+import { getFoods } from "@/services/foodService";
 
 const MealPage = () => {
   const router = useRouter();
@@ -16,7 +16,7 @@ const MealPage = () => {
   const [foods, setFoods] = useState<Food[]>([]);
 
   const [foodName, setFoodName] = useState("");
-  const [foodPortion, setFoodPortion] = useState<number | "">("");
+  const [foodPortion, setFoodPortion] = useState<number>(0);
 
   useEffect(() => {
     const fetchFoods = async () => {
