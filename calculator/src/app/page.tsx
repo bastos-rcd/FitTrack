@@ -54,6 +54,9 @@ const HomePage = () => {
         <Link href="/meal" className="p-2 rounded-xl bg-violet-300">
           <img src="/add.png" className="w-6" />
         </Link>
+        <Link href="/food" className="p-2 rounded-xl bg-violet-300">
+          <img src="/food.png" className="w-6" />
+        </Link>
       </div>
       <div
         className="w-full max-h-full overflow-y-scroll  flex flex-col items-center p-2 gap-y-2"
