@@ -19,10 +19,10 @@ const useMealStore = create<MealStore>((set) => ({
     })),
     calculateTotal: () => {
         const state: MealStore = useMealStore.getState();
-        const totalCalories = state.meal.reduce((sum: number, food) => sum + food.calories, 0);
-        const totalProteins = state.meal.reduce((sum: number, food) => sum + food.proteins, 0);
-        const totalCarbs = state.meal.reduce((sum: number, food) => sum + food.carbs, 0);
-        const totalFats = state.meal.reduce((sum: number, food) => sum + food.fats, 0);
+        const totalCalories = state.meal.reduce((sum: number, food) => sum + food.getCalories(), 0);
+        const totalProteins = state.meal.reduce((sum: number, food) => sum + food.getProteins(), 0);
+        const totalCarbs = state.meal.reduce((sum: number, food) => sum + food.getCarbs(), 0);
+        const totalFats = state.meal.reduce((sum: number, food) => sum + food.getFats(), 0);
         return { totalCalories, totalProteins, totalCarbs, totalFats };
     }
 }));
