@@ -11,8 +11,6 @@ export default async function getFoodList() {
             const data = doc.data();
             foods.push(new Food(doc.id, data.name, data.calories, data.proteins, data.carbs, data.fats));
         });
-
-        console.log(foods);
     } catch (error) {
 
     }

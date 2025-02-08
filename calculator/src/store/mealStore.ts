@@ -4,7 +4,6 @@ import { Food } from '@/models/food';
 interface MealStore {
     meal: Food[];
     addFood: (food: Food) => void;
-    removeFood: (food: Food) => void;
     calculateTotal: () => {
         totalCalories: number;
         totalProteins: number;
@@ -18,9 +17,6 @@ const useMealStore = create<MealStore>((set) => ({
     addFood: (food: Food) => set((state) => ({
         meal: [...state.meal, food],
     })),
-    removeFood: (food: Food) => set((state) => ({
-        meal: state.meal.filter((f) => f.name !== food.name),
-    })),
     calculateTotal: () => {
         const state: MealStore = useMealStore.getState();
         const totalCalories = state.meal.reduce((sum: number, food) => sum + food.calories, 0);
@@ -28,7 +24,7 @@ const useMealStore = create<MealStore>((set) => ({
         const totalCarbs = state.meal.reduce((sum: number, food) => sum + food.carbs, 0);
         const totalFats = state.meal.reduce((sum: number, food) => sum + food.fats, 0);
         return { totalCalories, totalProteins, totalCarbs, totalFats };
-    },
+    }
 }));
 
 export default useMealStore;
