@@ -3,15 +3,21 @@ import { collection, getDocs } from 'firebase/firestore'
 
 import { Food } from '@/models/food';
 
-export default async function getFoodList() {
+export default async function getFoods(): Promise<Food[]> {
     try {
-        const querySnapshot = await getDocs(collection(db, 'foods'));
         const foods: Food[] = [];
+
+        const querySnapshot = await getDocs(collection(db, 'foods'));
         querySnapshot.forEach((doc) => {
             const data = doc.data();
             foods.push(new Food(data.name, data.calories, data.proteins, data.carbs, data.fats));
         });
-    } catch (error) {
 
+        foods.sort((a, b) => a.getName().localeCompare(b.getName()));
+
+        return foods;
+    } catch (error) {
+        console.error('Error getting food list: ', error);
+        return [];
     }
 }
