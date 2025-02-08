@@ -37,7 +37,7 @@ export class Food {
         return this.fats;
     }
 
-    public setPortion(servingSize: number) {
+    public getPortion(servingSize: number) {
         return {
             calories: this.calculateMacros(this.calories, servingSize),
             proteins: this.calculateMacros(this.proteins, servingSize),
