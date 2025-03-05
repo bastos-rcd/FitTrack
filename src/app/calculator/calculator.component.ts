@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './calculator.component.css'
 })
 
-export class CalculatorComponent { }
+export class CalculatorComponent {
+  constructor() { }
+
+  public onExport() { }
+}

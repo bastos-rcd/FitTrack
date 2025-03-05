@@ -1,1 +1,13 @@
-<p>calculator works!</p>
+<div class="w-full flex flex-col items-center gap-y-4 md:gap-y-10">
+    <div class="w-full flex flex-row justify-evenly">
+        <button (click)="onExport()" class="py-2 px-3 rounded-xl bg-violet-300">
+            <i class="fa-solid fa-download"></i>
+        </button>
+        <a routerLink="/meal" class="py-2 px-3 rounded-xl bg-violet-300">
+            <i class="fa-solid fa-circle-plus"></i>
+        </a>
+        <a routerLink="/foods" class="py-2 px-3 rounded-xl bg-violet-300">
+            <i class="fa-solid fa-utensils"></i>
+        </a>
+    </div>
+</div>
