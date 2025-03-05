@@ -1,5 +1,6 @@
 <div class="w-full flex flex-col items-center gap-y-4 md:gap-y-10">
     <h1 class="text-2xl font-bold">Calculateur</h1>
+    <div class="w-full border-t border-black mb-4 md:mb-8"></div>
 
     <div class="w-full flex flex-row justify-evenly">
         <button (click)="onExport()" class="py-2 px-3 rounded-xl bg-violet-300">
@@ -20,5 +21,9 @@
             <span class="text-base text-amber-500">C : {{meal.getMacros().totalCarbs}} g</span>
             <span class="text-base text-red-500">F : {{meal.getMacros().totalFats}} g</span>
         </div>
+    </div>
+
+    <div *ngFor="let food of meal.getFoods()" class="w-full flex flex-col items-center">
+        <app-food-card class="w-full md:w-2/5" [food]="food"></app-food-card>
     </div>
 </div>

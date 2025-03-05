@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MealStoreService } from '../../services/meal-store.service';
 import { Meal } from '../../models/meal';
+import { Food } from '../../models/food';
 
 @Component({
   selector: 'app-calculator',
@@ -12,9 +12,8 @@ export class CalculatorComponent {
   public meal: Meal;
 
   constructor(
-    private mealStoreService: MealStoreService
   ) {
-    this.meal = this.mealStoreService.meal;
+    this.meal = new Meal();
   }
 
   public onExport() { }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Food } from '../../../models/food';
 
 @Component({
   selector: 'app-food-card',
@@ -6,4 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './food-card.component.css'
 })
 
-export class FoodCardComponent { }
+export class FoodCardComponent {
+  @Input() public food!: Food;
+
+  constructor() { }
+}
