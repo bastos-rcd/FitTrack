@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MealStoreService } from '../../services/meal-store.service';
+import { Meal } from '../../models/meal';
 
 @Component({
   selector: 'app-calculator',
@@ -7,7 +9,13 @@ import { Component } from '@angular/core';
 })
 
 export class CalculatorComponent {
-  constructor() { }
+  public meal: Meal;
+
+  constructor(
+    private mealStoreService: MealStoreService
+  ) {
+    this.meal = this.mealStoreService.meal;
+  }
 
   public onExport() { }
 }
