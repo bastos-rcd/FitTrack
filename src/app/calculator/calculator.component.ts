@@ -10,11 +10,10 @@ import { Food } from '../../models/food';
 
 export class CalculatorComponent {
   public meal: Meal;
+  public isExporting: boolean = false;
 
   constructor(
   ) {
     this.meal = new Meal();
   }
-
-  public onExport() { }
 }
