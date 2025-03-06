@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Meal } from '../../models/meal';
 import { Food } from '../../models/food';
+import { MealStoreService } from '../../services/meal-store.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-calculator',
@@ -9,11 +11,12 @@ import { Food } from '../../models/food';
 })
 
 export class CalculatorComponent {
-  public meal: Meal;
+  public meal: Observable<Meal>;
   public isExporting: boolean = false;
 
   constructor(
+    private mealStore: MealStoreService
   ) {
-    this.meal = new Meal();
+    this.meal = this.mealStore.meal$;
   }
 }

@@ -1,16 +1,16 @@
 <div *ngIf="isExporting" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2">
     <div class="w-full md:w-1/4 flex flex-col justify-center items-center p-6 rounded-xl gap-y-2 bg-white">
         <span class="text-base text-gray-500">
-            Calories : {{meal.getMacros().totalCalories}} kcal
+            Calories : {{ (meal | async)!.getMacros().totalCalories }} kcal
         </span>
         <span class="text-base text-green-500">
-            Protéines : {{meal.getMacros().totalProteins}} g
+            Protéines : {{ (meal | async)!.getMacros().totalProteins }} g
         </span>
         <span class="text-base text-amber-500">
-            Glucides : {{meal.getMacros().totalCarbs}} g
+            Glucides : {{ (meal | async)!.getMacros().totalCarbs }} g
         </span>
         <span class="text-base text-red-500">
-            Lipides : {{meal.getMacros().totalFats}} g
+            Lipides : {{ (meal | async)!.getMacros().totalFats }} g
         </span>
         <button (click)="isExporting = false" class="mt-4 p-2 rounded-xl bg-rose-300">
             <i class="fa-solid fa-circle-xmark"></i>
@@ -26,7 +26,7 @@
         <button (click)="isExporting = true" class="py-2 px-3 rounded-xl bg-violet-300">
             <i class="fa-solid fa-download"></i>
         </button>
-        <a routerLink="/meal" class="py-2 px-3 rounded-xl bg-violet-300">
+        <a routerLink="/food-get" class="py-2 px-3 rounded-xl bg-violet-300">
             <i class="fa-solid fa-circle-plus"></i>
         </a>
         <a routerLink="/foods" class="py-2 px-3 rounded-xl bg-violet-300">
@@ -35,15 +35,15 @@
     </div>
 
     <div class="w-full flex flex-col items-center gap-y-4 md:gap-y-10">
-        <span class="text-lg font-bold">{{ meal.getMacros().totalCalories}} kcl</span>
+        <span class="text-lg font-bold">{{ (meal | async)!.getMacros().totalCalories }} kcl</span>
         <div class="w-full flex flex-row justify-evenly font-semibold">
-            <span class="text-base text-green-500">P : {{meal.getMacros().totalProteins}} g</span>
-            <span class="text-base text-amber-500">C : {{meal.getMacros().totalCarbs}} g</span>
-            <span class="text-base text-red-500">F : {{meal.getMacros().totalFats}} g</span>
+            <span class="text-base text-green-500">P : {{ (meal | async)!.getMacros().totalProteins }} g</span>
+            <span class="text-base text-amber-500">C : {{ (meal | async)!.getMacros().totalCarbs }} g</span>
+            <span class="text-base text-red-500">F : {{ (meal | async)!.getMacros().totalFats }} g</span>
         </div>
     </div>
 
-    <div *ngFor="let food of meal.getFoods()" class="w-full flex flex-col items-center">
+    <div *ngFor="let food of (meal | async)!.getFoods()" class="w-full flex flex-col items-center">
         <app-food-card class="w-full md:w-2/5" [food]="food"></app-food-card>
     </div>
 </div>
