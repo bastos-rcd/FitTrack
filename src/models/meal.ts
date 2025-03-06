@@ -11,6 +11,10 @@ export class Meal {
         this.foods.push(_food);
     }
 
+    public removeFood(_food: Food): void {
+        this.foods = this.foods.filter(food => food !== _food);
+    }
+
     public getFoods(): Food[] {
         return this.foods;
     }
