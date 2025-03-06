@@ -1,3 +1,29 @@
 <div class="w-full flex flex-col items-center gap-y-4 md:gap-y-10">
+    <form (ngSubmit)="onSubmit()"
+        class="w-full md:w-2/5 flex flex-row text-base justify-center items-center gap-x-4 md:gap-x-10">
+        <div class="flex flex-col w-full gap-y-4 md:gap-y-10">
+            <select class="appearance-none w-full bg-white p-2 rounded-xl" name="food" id="food"
+                [(ngModel)]="model.foodName" required>
+                <option *ngFor="let food of foods" [value]="food.getName()">{{ food.getName() }}</option>
+            </select>
 
+            <input class="w-full bg-white p-2 rounded-xl" type="number" inputmode="decimal" id="portion" name="portion"
+                [(ngModel)]="model.portion" placeholder="Portion (en g)" required>
+        </div>
+
+        <div class="flex flex-col gap-y-4 md:gap-y-10">
+            <button type="submit" class="bg-violet-300 hover:bg-violet-400 rounded-xl px-3 py-2">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <a routerLink="/calculator" class="bg-rose-300 hover:bg-rose-400 rounded-xl px-3 py-2">
+                <i class="fa-solid fa-rotate-left"></i>
+            </a>
+        </div>
+    </form>
+
+    <app-food-card *ngIf="food" class="w-full md:w-2/5" [food]="food"></app-food-card>
+
+    <button *ngIf="food" (click)="onAddFood()" class="bg-green-300 hover:bg-green-400 rounded-xl px-3 py-2">
+        <i class="fa-regular fa-plus"></i>
+    </button>
 </div>
