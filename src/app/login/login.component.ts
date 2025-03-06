@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 
 export class LoginComponent {
-  model: any = {};
+  public model: any = {};
 
   constructor(
     private authService: AuthService,
