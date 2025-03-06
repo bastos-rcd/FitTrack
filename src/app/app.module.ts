@@ -13,6 +13,7 @@ import { CalculatorComponent } from './calculator/calculator.component';
 import { FoodCardComponent } from './food/food-card/food-card.component';
 import { FoodGetComponent } from './food/food-get/food-get.component';
 import { FoodListComponent } from './food/food-list/food-list.component';
+import { FoodNewComponent } from './food/food-new/food-new.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FoodListComponent } from './food/food-list/food-list.component';
     CalculatorComponent,
     FoodCardComponent,
     FoodGetComponent,
-    FoodListComponent
+    FoodListComponent,
+    FoodNewComponent
   ],
   imports: [
     BrowserModule,

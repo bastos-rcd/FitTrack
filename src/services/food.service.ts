@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Food } from '../models/food';
 import { db } from './firebase-config';
-import { collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,20 @@ export class FoodService {
     } catch (error) {
       console.error('Error getting foods:', error);
       return [];
+    }
+  }
+
+  public async createFood(food: Food): Promise<void> {
+    try {
+      await addDoc(collection(db, 'foods'), {
+        name: food.getName(),
+        calories: food.getCalories(),
+        proteins: food.getProteins(),
+        carbs: food.getCarbs(),
+        fats: food.getFats()
+      })
+    } catch (error) {
+      console.error('Error creating food:', error);
     }
   }
 }

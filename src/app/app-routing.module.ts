@@ -7,13 +7,15 @@ import { HomeComponent } from './home/home.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { FoodGetComponent } from './food/food-get/food-get.component';
 import { FoodListComponent } from './food/food-list/food-list.component';
+import { FoodNewComponent } from './food/food-new/food-new.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'calculator', component: CalculatorComponent, canActivate: [AuthGuard] },
   { path: 'food-get', component: FoodGetComponent, canActivate: [AuthGuard] },
-  { path: 'foods', component: FoodListComponent, canActivate: [AuthGuard] }
+  { path: 'foods', component: FoodListComponent, canActivate: [AuthGuard] },
+  { path: 'food-new', component: FoodNewComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
