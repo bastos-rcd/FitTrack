@@ -14,6 +14,7 @@ import { FoodCardComponent } from './food/food-card/food-card.component';
 import { FoodGetComponent } from './food/food-get/food-get.component';
 import { FoodListComponent } from './food/food-list/food-list.component';
 import { FoodNewComponent } from './food/food-new/food-new.component';
+import { FoodEditComponent } from './food/food-edit/food-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FoodNewComponent } from './food/food-new/food-new.component';
     FoodCardComponent,
     FoodGetComponent,
     FoodListComponent,
-    FoodNewComponent
+    FoodNewComponent,
+    FoodEditComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,47 @@
+<div class="w-full flex flex-col items-center gap-y-4 md:gap-y-10">
+    <h1 class="text-2xl font-bold">Modification d'un aliment</h1>
+    <div class="w-full border-t border-black mb-4 md:mb-8"></div>
+
+    <form (ngSubmit)="onSubmit()" class="w-full md:w-2/5">
+        <div class="mb-5">
+            <label for="name" class="block mb-2 text-sm font-normal">Nom de l'aliment</label>
+            <input type="name" id="name" name="name" [(ngModel)]="model.name"
+                class="bg-white border border-slate-500 text-sm rounded-lg block w-full p-2.5" required />
+        </div>
+
+        <div class="mb-5">
+            <label for="calories" class="block mb-2 text-sm font-normal">Calories (kcal)</label>
+            <input type="number" inputmode="decimal" id="calories" name="calories" [(ngModel)]="model.calories"
+                class="bg-white border border-slate-500 text-sm rounded-lg block w-full p-2.5" required />
+        </div>
+
+        <div class="mb-5">
+            <label for="proteins" class="block mb-2 text-sm font-normal">Protéines (g)</label>
+            <input type="number" inputmode="decimal" id="proteins" name="proteins" [(ngModel)]="model.proteins"
+                class="bg-white border border-slate-500 text-sm rounded-lg block w-full p-2.5" required />
+        </div>
+
+        <div class="mb-5">
+            <label for="carbs" class="block mb-2 text-sm font-normal">Glucides (g)</label>
+            <input type="number" inputmode="decimal" id="carbs" name="carbs" [(ngModel)]="model.carbs"
+                class="bg-white border border-slate-500 text-sm rounded-lg block w-full p-2.5" required />
+        </div>
+
+        <div class="mb-5">
+            <label for="fats" class="block mb-2 text-sm font-normal">Lipides (g)</label>
+            <input type="number" inputmode="decimal" id="fats" name="fats" [(ngModel)]="model.fats"
+                class="bg-white border border-slate-500 text-sm rounded-lg block w-full p-2.5" required />
+        </div>
+
+        <div class="flex flex-row gap-x-4 md:gap-x-10">
+            <button type="submit"
+                class="bg-green-300 hover:bg-green-400 font-semibold rounded-lg text-sm w-full px-5 py-2.5 text-center">
+                <i class="fa-solid fa-check"></i>
+            </button>
+            <a routerLink="/foods"
+                class="bg-rose-300 hover:bg-rose-400 font-semibold rounded-lg text-sm w-full px-5 py-2.5 text-center">
+                <i class="fa-solid fa-rotate-left"></i>
+            </a>
+        </div>
+    </form>
+</div>

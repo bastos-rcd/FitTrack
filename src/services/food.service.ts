@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Food } from '../models/food';
 import { db } from './firebase-config';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, getDocs, updateDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,30 @@ import { addDoc, collection, getDocs } from 'firebase/firestore';
 
 export class FoodService {
   constructor() { }
+
+  public async getFood(name: string): Promise<Food> {
+    let food: Food = new Food('', 0, 0, 0, 0);
+
+    try {
+      const querySnapshot = await getDocs(collection(db, 'foods'));
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        if (data['name'] === name) {
+          food = new Food(
+            data['name'],
+            data['calories'],
+            data['proteins'],
+            data['carbs'],
+            data['fats']
+          );
+        }
+      });
+    } catch (error) {
+      console.error('Error getting food:', error);
+    }
+
+    return food;
+  }
 
   public async getFoods(): Promise<Food[]> {
     try {
@@ -46,6 +70,26 @@ export class FoodService {
       })
     } catch (error) {
       console.error('Error creating food:', error);
+    }
+  }
+
+  public async updateFood(previousName: string, food: Food): Promise<void> {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'foods'));
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        if (data['name'] === previousName) {
+          updateDoc(doc.ref, {
+            name: food.getName(),
+            calories: food.getCalories(),
+            proteins: food.getProteins(),
+            carbs: food.getCarbs(),
+            fats: food.getFats()
+          });
+        }
+      });
+    } catch (error) {
+      console.error('Error updating food:', error);
     }
   }
 }

@@ -8,6 +8,7 @@ import { CalculatorComponent } from './calculator/calculator.component';
 import { FoodGetComponent } from './food/food-get/food-get.component';
 import { FoodListComponent } from './food/food-list/food-list.component';
 import { FoodNewComponent } from './food/food-new/food-new.component';
+import { FoodEditComponent } from './food/food-edit/food-edit.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'calculator', component: CalculatorComponent, canActivate: [AuthGuard] },
   { path: 'food-get', component: FoodGetComponent, canActivate: [AuthGuard] },
   { path: 'foods', component: FoodListComponent, canActivate: [AuthGuard] },
-  { path: 'food-new', component: FoodNewComponent, canActivate: [AuthGuard] }
+  { path: 'food-new', component: FoodNewComponent, canActivate: [AuthGuard] },
+  { path: 'food-edit/:name', component: FoodEditComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
