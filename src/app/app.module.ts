@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { FoodCardComponent } from './food/food-card/food-card.component';
 import { FoodGetComponent } from './food/food-get/food-get.component';
+import { FoodListComponent } from './food/food-list/food-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FoodGetComponent } from './food/food-get/food-get.component';
     LoginComponent,
     CalculatorComponent,
     FoodCardComponent,
-    FoodGetComponent
+    FoodGetComponent,
+    FoodListComponent
   ],
   imports: [
     BrowserModule,
