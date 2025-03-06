@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Food } from '../models/food';
 import { db } from './firebase-config';
-import { addDoc, collection, getDocs, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, getDocs, updateDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -90,6 +90,20 @@ export class FoodService {
       });
     } catch (error) {
       console.error('Error updating food:', error);
+    }
+  }
+
+  public async deleteFood(name: string): Promise<void> {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'foods'));
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        if (data['name'] === name) {
+          deleteDoc(doc.ref);
+        }
+      });
+    } catch (error) {
+      console.error('Error deleting food:', error);
     }
   }
 }

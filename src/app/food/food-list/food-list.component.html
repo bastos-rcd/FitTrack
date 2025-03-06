@@ -23,7 +23,8 @@
                     <i class="fa-solid fa-pen"></i>
                 </a>
 
-                <button class="bg-rose-300 hover:bg-rose-400 rounded-xl px-3 py-2">
+                <button (click)="onDeleteFood(food.getName())"
+                    class="bg-rose-300 hover:bg-rose-400 rounded-xl px-3 py-2">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </div>
