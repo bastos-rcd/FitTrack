@@ -43,7 +43,6 @@
         </div>
     </div>
 
-    <div *ngFor="let food of (meal | async)!.getFoods()" class="w-full flex flex-col items-center">
-        <app-food-card class="w-full md:w-2/5" [food]="food"></app-food-card>
-    </div>
+    <app-food-card *ngFor="let food of (meal | async)!.getFoods()" class="w-full md:w-2/5"
+        [food]="food"></app-food-card>
 </div>

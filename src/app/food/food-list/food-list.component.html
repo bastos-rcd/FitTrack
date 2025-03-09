@@ -12,28 +12,25 @@
         </a>
     </div>
 
-    <div class="w-full md:w-2/5 flex flex-col items-center gap-y-4 md:gap-y-10">
-        <div *ngFor="let food of foods"
-            class="w-full flex flex-col items-center text-base bg-slate-300 rounded-xl p-2 md:p-4 gap-y-2 md:gap-y-4">
-            <div class="w-full flex flex-row items-center gap-x-2 md:gap-x-4">
-                <h1 class="w-full text-center font-semibold">{{ food.getName() }}</h1>
+    <div *ngFor="let food of foods"
+        class="w-full md:w-2/5 flex flex-col items-center text-base bg-slate-300 rounded-xl p-2 md:p-4 gap-y-2 md:gap-y-4">
+        <div class="w-full flex flex-row items-center gap-x-2 md:gap-x-4">
+            <h1 class="w-full text-center font-semibold">{{ food.getName() }}</h1>
 
-                <a routerLink="/food-edit/{{ food.getName() }}"
-                    class="bg-orange-300 hover:bg-orange-400 rounded-xl px-3 py-2">
-                    <i class="fa-solid fa-pen"></i>
-                </a>
+            <a routerLink="/food-edit/{{ food.getName() }}"
+                class="bg-orange-300 hover:bg-orange-400 rounded-xl px-3 py-2">
+                <i class="fa-solid fa-pen"></i>
+            </a>
 
-                <button (click)="onDeleteFood(food.getName())"
-                    class="bg-rose-300 hover:bg-rose-400 rounded-xl px-3 py-2">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-            </div>
-            <span>{{ food.getCalories()}} kcl</span>
-            <div class="w-full flex flex-row justify-evenly">
-                <span class="text-base text-green-500">P : {{food.getProteins()}} g</span>
-                <span class="text-base text-amber-500">C : {{food.getCarbs()}} g</span>
-                <span class="text-base text-red-500">F : {{food.getFats()}} g</span>
-            </div>
+            <button (click)="onDeleteFood(food.getName())" class="bg-rose-300 hover:bg-rose-400 rounded-xl px-3 py-2">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+        <span>{{ food.getCalories()}} kcl</span>
+        <div class="w-full flex flex-row justify-evenly">
+            <span class="text-base text-green-500">P : {{food.getProteins()}} g</span>
+            <span class="text-base text-amber-500">C : {{food.getCarbs()}} g</span>
+            <span class="text-base text-red-500">F : {{food.getFats()}} g</span>
         </div>
     </div>
 </div>
