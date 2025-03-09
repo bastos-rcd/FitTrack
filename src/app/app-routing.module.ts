@@ -10,6 +10,7 @@ import { FoodListComponent } from './food/food-list/food-list.component';
 import { FoodNewComponent } from './food/food-new/food-new.component';
 import { FoodEditComponent } from './food/food-edit/food-edit.component';
 import { ProgramListComponent } from './program/program-list/program-list.component';
+import { WorkoutListComponent } from './workout/workout-list/workout-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'foods', component: FoodListComponent, canActivate: [AuthGuard] },
   { path: 'food-new', component: FoodNewComponent, canActivate: [AuthGuard] },
   { path: 'food-edit/:name', component: FoodEditComponent, canActivate: [AuthGuard] },
-  { path: 'programs', component: ProgramListComponent, canActivate: [AuthGuard] }
+  { path: 'programs', component: ProgramListComponent, canActivate: [AuthGuard] },
+  { path: 'program/:name', component: WorkoutListComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

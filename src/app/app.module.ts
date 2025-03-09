@@ -17,6 +17,7 @@ import { FoodNewComponent } from './food/food-new/food-new.component';
 import { FoodEditComponent } from './food/food-edit/food-edit.component';
 import { ProgramListComponent } from './program/program-list/program-list.component';
 import { ProgramCardComponent } from './program/program-card/program-card.component';
+import { WorkoutListComponent } from './workout/workout-list/workout-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ProgramCardComponent } from './program/program-card/program-card.compon
     FoodNewComponent,
     FoodEditComponent,
     ProgramListComponent,
-    ProgramCardComponent
+    ProgramCardComponent,
+    WorkoutListComponent
   ],
   imports: [
     BrowserModule,
