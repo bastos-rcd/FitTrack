@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Food } from '../models/food';
 import { db } from './firebase-config';
+import { Food } from '../models/food';
 import { addDoc, collection, deleteDoc, getDocs, updateDoc } from 'firebase/firestore';
 
 @Injectable({
