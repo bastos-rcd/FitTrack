@@ -1,0 +1,6 @@
+<a routerLink="/workout/{{ programName }}/{{ workout.getName() }}">
+    <div class="flex flex-col items-center text-base bg-slate-300 rounded-xl p-2 md:p-4 gap-y-2 md:gap-y-4">
+        <h1 class="font-semibold">{{ workout.getName() }}</h1>
+        <span>{{ workout.getExercises().length}} exercices</span>
+    </div>
+</a>
