@@ -1,6 +1,8 @@
 export enum ExerciseType {
-    TOPSET = 'top-set',
-    DROPTSET = 'drop-set'
+    TOP = 'top',
+    DROP = 'drop',
+    SUPER = 'super',
+    NORMAL = 'normal'
 }
 
 export class Exercise {
@@ -10,7 +12,13 @@ export class Exercise {
     private reps: number;
     private weight: number;
 
-    constructor(_name: string, _type: ExerciseType, _sets: number, _reps: number, _weight: number) {
+    constructor(
+        _name: string,
+        _type: ExerciseType,
+        _sets: number,
+        _reps: number,
+        _weight: number
+    ) {
         this.name = _name;
         this.type = _type;
         this.sets = _sets;

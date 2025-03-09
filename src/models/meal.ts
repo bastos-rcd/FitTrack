@@ -7,11 +7,15 @@ export class Meal {
         this.foods = [];
     }
 
-    public addFood(_food: Food): void {
+    public addFood(
+        _food: Food
+    ): void {
         this.foods.push(_food);
     }
 
-    public removeFood(_food: Food): void {
+    public removeFood(
+        _food: Food
+    ): void {
         this.foods = this.foods.filter(food => food !== _food);
     }
 

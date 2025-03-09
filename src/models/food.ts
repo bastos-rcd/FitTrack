@@ -5,7 +5,13 @@ export class Food {
     private carbs: number;
     private fats: number;
 
-    constructor(_name: string, _calories: number, _proteins: number, _carbs: number, _fats: number) {
+    constructor(
+        _name: string,
+        _calories: number,
+        _proteins: number,
+        _carbs: number,
+        _fats: number
+    ) {
         this.name = _name;
         this.calories = parseFloat(_calories.toFixed(2));
         this.proteins = parseFloat(_proteins.toFixed(2));
@@ -13,7 +19,10 @@ export class Food {
         this.fats = parseFloat(_fats.toFixed(2));
     }
 
-    private macrosCalculation(_value: number, _serving: number): number {
+    private macrosCalculation(
+        _value: number,
+        _serving: number
+    ): number {
         return parseFloat((_value * (_serving / 100)).toFixed(2));
     }
 
@@ -37,7 +46,9 @@ export class Food {
         return this.fats;
     }
 
-    public getMacros(_size: number): any {
+    public getMacros(
+        _size: number
+    ): any {
         return {
             calories: this.macrosCalculation(this.calories, _size),
             proteins: this.macrosCalculation(this.proteins, _size),
