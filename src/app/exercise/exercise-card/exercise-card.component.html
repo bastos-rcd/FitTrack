@@ -2,11 +2,6 @@
     <div class="w-full flex flex-row items-center gap-x-2 md:gap-x-4">
         <h1 class="w-full text-center font-semibold">{{ exercise.getName() }}</h1>
 
-        <a routerLink="/exercise-edit/{{ program }}/{{ workout }}/{{ exerciseIndex }}"
-            class="py-1 px-2 rounded-xl bg-amber-300">
-            <i class="fa-solid fa-pen"></i>
-        </a>
-
         <button (click)="onDelete()" class="py-1 px-2 rounded-xl bg-rose-300">
             <i class="fa-solid fa-trash"></i>
         </button>
