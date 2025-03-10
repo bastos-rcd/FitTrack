@@ -12,19 +12,31 @@ export class WorkoutService {
     private programService: ProgramService
   ) { }
 
+  public async getWorkout(programName: string, workoutIndex: number): Promise<Workout> {
+    try {
+      const workouts = await this.getWorkouts(programName);
+
+      if (workouts.length > workoutIndex) {
+        return workouts[workoutIndex];
+      }
+
+      return new Workout('', []);
+    } catch (error) {
+      console.error('Error getting workout:', error);
+      return new Workout('', []);
+    }
+  }
+
   public async getWorkouts(programName: string): Promise<Workout[]> {
     try {
-      const workouts: Workout[] = [];
+      const programs = await this.programService.getPrograms();
+      const program = programs.find((program) => program.getName() === programName);
 
-      this.programService.getPrograms().then((programs) => {
-        const program = programs.find((program) => program.getName() === programName);
+      if (program) {
+        return program.getWorkouts();
+      }
 
-        if (program) {
-          workouts.push(...program.getWorkouts());
-        }
-      });
-
-      return workouts;
+      return [];
     } catch (error) {
       console.error('Error getting workouts:', error);
       return [];
