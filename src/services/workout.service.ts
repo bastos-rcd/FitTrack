@@ -67,14 +67,15 @@ export class WorkoutService {
     }
   }
 
-  public async deleteWorkout(program: string, workout: Workout): Promise<void> {
+  public async deleteWorkout(program: string, workout: number): Promise<void> {
     try {
       const querySnapshot = await getDocs(collection(db, 'programs'));
       querySnapshot.forEach((docProgram) => {
         const dataProgram = docProgram.data();
 
         if (dataProgram['name'] === program) {
-          const workouts = dataProgram['workouts'].filter((workoutData: any) => workoutData['name'] !== workout.getName());
+          const workouts = dataProgram['workouts'];
+          workouts.splice(workout, 1);
 
           updateDoc(docProgram.ref, {
             name: dataProgram['name'],

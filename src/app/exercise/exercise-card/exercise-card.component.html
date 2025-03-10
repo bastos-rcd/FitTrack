@@ -1,9 +1,19 @@
-<a routerLink="/exercise/{{ program }}/{{ workout }}/{{ exerciseIndex }}">
-    <div class="flex flex-col items-center text-base bg-slate-300 rounded-xl p-2 md:p-4 gap-y-2 md:gap-y-4">
-        <h1 class="font-semibold">{{ exercise.getName() }}</h1>
+<div class="flex flex-col items-center text-base bg-slate-300 rounded-xl p-2 md:p-4 gap-y-2 md:gap-y-4">
+    <div class="w-full flex flex-row items-center gap-x-2 md:gap-x-4">
+        <h1 class="w-full text-center font-semibold">{{ exercise.getName() }}</h1>
 
-        <div class="w-full flex flex-row justify-center items-center gap-x-2 md:gap-x-4">
-            <span class="text-xs rounded-xl px-1.5 py-0.5" [ngClass]="{
+        <a routerLink="/exercise-edit/{{ program }}/{{ workout }}/{{ exerciseIndex }}"
+            class="py-1 px-2 rounded-xl bg-amber-300">
+            <i class="fa-solid fa-pen"></i>
+        </a>
+
+        <button (click)="onDelete()" class="py-1 px-2 rounded-xl bg-rose-300">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+    </div>
+
+    <div class="w-full flex flex-row justify-center items-center gap-x-2 md:gap-x-4">
+        <span class="text-xs rounded-xl px-1.5 py-0.5" [ngClass]="{
                 'bg-green-300': exercise.getType() === 'top',
                 'bg-rose-300': exercise.getType() === 'drop',
                 'bg-violet-300': exercise.getType() === 'super',
@@ -11,13 +21,12 @@
             }
             ">{{ exercise.getType() }}</span>
 
-            <span class="text-xs bg-orange-300 rounded-xl px-1.5 py-0.5">{{ exercise.getGoal() }}</span>
+        <span class="text-xs bg-orange-300 rounded-xl px-1.5 py-0.5">{{ exercise.getGoal() }}</span>
 
-            <span class="text-xs bg-amber-300 rounded-xl px-1.5 py-0.5">{{ exercise.getSets() }} séries</span>
-        </div>
-
-        <div class="w-full flex flex-row justify-center items-center">
-            {{ exercise.getReps() }} x {{ exercise.getWeight() }} kg
-        </div>
+        <span class="text-xs bg-amber-300 rounded-xl px-1.5 py-0.5">{{ exercise.getSets() }} séries</span>
     </div>
-</a>
+
+    <div class="w-full flex flex-row justify-center items-center">
+        {{ exercise.getReps() }} x {{ exercise.getWeight() }} kg
+    </div>
+</div>

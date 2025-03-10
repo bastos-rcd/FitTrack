@@ -21,7 +21,7 @@ export class WorkoutCardComponent {
 
   public onDelete(): void {
     if (confirm('Supprimer ' + this.workout.getName() + ' ?')) {
-      this.workoutService.deleteWorkout(this.program, this.workout).then(() => {
+      this.workoutService.deleteWorkout(this.program, this.workoutIndex).then(() => {
         this.router.navigate(['/']);
       });
     }

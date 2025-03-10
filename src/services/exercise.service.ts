@@ -61,4 +61,24 @@ export class ExerciseService {
       console.error('Error creating workout:', error);
     }
   }
+
+  public async deleteExercise(programName: string, workoutIndex: number, exerciseIndex: number): Promise<void> {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'programs'));
+      querySnapshot.forEach((docProgram) => {
+        const dataProgram = docProgram.data();
+
+        if (dataProgram['name'] === programName as string) {
+          dataProgram['workouts'][workoutIndex].exercises.splice(exerciseIndex, 1);
+
+          updateDoc(docProgram.ref, {
+            name: dataProgram['name'],
+            workouts: dataProgram['workouts']
+          });
+        }
+      });
+    } catch (error) {
+      console.error('Error deleting exercise:', error);
+    }
+  }
 }
