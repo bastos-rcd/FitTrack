@@ -12,6 +12,7 @@ import { FoodEditComponent } from './food/food-edit/food-edit.component';
 import { ProgramListComponent } from './program/program-list/program-list.component';
 import { WorkoutListComponent } from './workout/workout-list/workout-list.component';
 import { ExerciseListComponent } from './exercise/exercise-list/exercise-list.component';
+import { ProgramNewComponent } from './program/program-new/program-new.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'food-edit/:name', component: FoodEditComponent, canActivate: [AuthGuard] },
   { path: 'programs', component: ProgramListComponent, canActivate: [AuthGuard] },
   { path: 'program/:program', component: WorkoutListComponent, canActivate: [AuthGuard] },
-  { path: 'workout/:program/:workout', component: ExerciseListComponent, canActivate: [AuthGuard] }
+  { path: 'workout/:program/:workout', component: ExerciseListComponent, canActivate: [AuthGuard] },
+  { path: 'program-new', component: ProgramNewComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

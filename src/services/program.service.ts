@@ -3,7 +3,7 @@ import { db } from './firebase-config';
 import { Program } from '../models/program';
 import { Workout } from '../models/workout';
 import { Exercise, ExerciseType } from '../models/exercise';
-import { collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +57,31 @@ export class ProgramService {
     } catch (error) {
       console.error('Error getting programs:', error);
       return [];
+    }
+  }
+
+  public async createProgram(program: Program): Promise<void> {
+    try {
+      await addDoc(collection(db, 'programs'), {
+        name: program.getName(),
+        workouts: program.getWorkouts().map((workout) => {
+          return {
+            name: workout.getName(),
+            exercises: workout.getExercises().map((exercise) => {
+              return {
+                name: exercise.getName(),
+                type: exercise.getType(),
+                goal: exercise.getGoal(),
+                sets: exercise.getSets(),
+                reps: exercise.getReps(),
+                weight: exercise.getWeight()
+              }
+            })
+          }
+        })
+      });
+    } catch (error) {
+      console.error('Error creating program:', error);
     }
   }
 }
