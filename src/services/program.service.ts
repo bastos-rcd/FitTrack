@@ -3,7 +3,7 @@ import { db } from './firebase-config';
 import { Program } from '../models/program';
 import { Workout } from '../models/workout';
 import { Exercise, ExerciseType } from '../models/exercise';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, getDocs } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +82,20 @@ export class ProgramService {
       });
     } catch (error) {
       console.error('Error creating program:', error);
+    }
+  }
+
+  public async deleteProgram(program: Program): Promise<void> {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'programs'));
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        if (data['name'] === program.getName()) {
+          deleteDoc(doc.ref);
+        }
+      });
+    } catch (error) {
+      console.error('Error deleting program:', error);
     }
   }
 }
