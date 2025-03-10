@@ -1,0 +1,14 @@
+<div class="flex flex-col items-center justify-center gap-y-8">
+    <h1 class="text-2xl font-semibold">Nouvelle séance</h1>
+
+    <form (ngSubmit)="onSubmit()" class="w-full md:w-2/5">
+        <div class="mb-5">
+            <label for="name" class="block mb-2 text-sm font-normal">Nom de la séance</label>
+            <input type="name" id="name" name="name" [(ngModel)]="model.name"
+                class="bg-white border border-slate-500 text-sm rounded-lg block w-full p-2.5" required />
+        </div>
+
+        <button type="submit"
+            class="text-white bg-emerald-500 hover:bg-emerald-800 font-semibold rounded-lg text-sm w-full px-5 py-2.5 text-center">VALIDER</button>
+    </form>
+</div>

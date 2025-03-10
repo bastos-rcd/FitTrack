@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { db } from './firebase-config';
 import { Workout } from '../models/workout';
 import { ProgramService } from './program.service';
+import { collection, getDocs, updateDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,32 @@ export class WorkoutService {
     } catch (error) {
       console.error('Error getting workouts:', error);
       return [];
+    }
+  }
+
+  public async createWorkout(programName: string, workout: Workout): Promise<void> {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'programs'));
+      querySnapshot.forEach((docProgram) => {
+        const dataProgram = docProgram.data();
+
+        console.log(dataProgram['name'] + ' et ' + programName);
+
+        if (dataProgram['name'] === programName as string) {
+          console.log(dataProgram['workouts']);
+          dataProgram['workouts'].push({
+            name: workout.getName(),
+            exercises: workout.getExercises()
+          });
+
+          updateDoc(docProgram.ref, {
+            name: dataProgram['name'],
+            workouts: dataProgram['workouts']
+          });
+        }
+      });
+    } catch (error) {
+      console.error('Error creating workout:', error);
     }
   }
 }
