@@ -10,7 +10,7 @@ import { Workout } from '../../../models/workout';
 })
 
 export class WorkoutListComponent {
-  public programName: string = '';
+  public program: string = '';
   public workouts: Workout[] = [];
 
   constructor(
@@ -18,9 +18,9 @@ export class WorkoutListComponent {
     private route: ActivatedRoute
   ) {
     this.route.params.subscribe((params) => {
-      this.programName = params['name'];
+      this.program = params['program'];
 
-      this.workoutService.getWorkouts(this.programName).then((workouts) => {
+      this.workoutService.getWorkouts(this.program).then((workouts) => {
         this.workouts = workouts;
       });
     });

@@ -8,6 +8,7 @@ export enum ExerciseType {
 export class Exercise {
     private name: string;
     private type: ExerciseType;
+    private goal: string;
     private sets: number;
     private reps: number;
     private weight: number;
@@ -15,12 +16,14 @@ export class Exercise {
     constructor(
         _name: string,
         _type: ExerciseType,
+        _goal: string,
         _sets: number,
         _reps: number,
         _weight: number
     ) {
         this.name = _name;
         this.type = _type;
+        this.goal = _goal;
         this.sets = _sets;
         this.reps = _reps;
         this.weight = _weight;
@@ -32,6 +35,10 @@ export class Exercise {
 
     public getType(): ExerciseType {
         return this.type;
+    }
+
+    public getGoal(): string {
+        return this.goal;
     }
 
     public getSets(): number {

@@ -15,43 +15,43 @@ export class ProgramService {
   public async getPrograms(): Promise<Program[]> {
     try {
       const programs: Program[] = [];
-      const programsSnapshot = await getDocs(collection(db, 'programs'));
 
-      for (const programDoc of programsSnapshot.docs) {
-        const programData = programDoc.data();
-
+      const querySnapshot = await getDocs(collection(db, 'programs'));
+      querySnapshot.forEach((docProgram) => {
+        const dataProgram = docProgram.data();
         const workouts: Workout[] = [];
-        const workoutsSnapshot = await getDocs(collection(programDoc.ref, 'workouts'));
 
-        for (const workoutDoc of workoutsSnapshot.docs) {
-          const workoutData = workoutDoc.data();
-
+        dataProgram['workouts'].forEach((workout: any) => {
           const exercises: Exercise[] = [];
-          const exercisesSnapshot = await getDocs(collection(workoutDoc.ref, 'exercises'));
 
-          for (const exerciseDoc of exercisesSnapshot.docs) {
-            const exerciseData = exerciseDoc.data();
+          workout['exercises'].forEach((exercise: any) => {
+            exercises.push(
+              new Exercise(
+                exercise['name'],
+                exercise['type'] as ExerciseType,
+                exercise['goal'],
+                exercise['sets'],
+                exercise['reps'],
+                exercise['weight']
+              )
+            );
+          });
 
-            exercises.push(new Exercise(
-              exerciseData['name'],
-              exerciseData['type'],
-              exerciseData['sets'],
-              exerciseData['reps'],
-              exerciseData['weight']
-            ));
-          }
+          workouts.push(
+            new Workout(
+              workout['name'],
+              exercises
+            )
+          );
+        });
 
-          workouts.push(new Workout(
-            workoutData['name'],
-            exercises
-          ));
-        }
-
-        programs.push(new Program(
-          programData['name'],
-          workouts
-        ));
-      }
+        programs.push(
+          new Program(
+            dataProgram['name'],
+            workouts
+          )
+        );
+      });
 
       return programs;
     } catch (error) {

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { db } from './firebase-config';
 import { Exercise } from '../models/exercise';
 import { WorkoutService } from './workout.service';
 

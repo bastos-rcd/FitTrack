@@ -1,7 +1,7 @@
 <div class="w-full flex flex-col items-center gap-y-4 md:gap-y-10">
-    <h1 class="text-2xl font-bold text-center">{{ programName }}</h1>
+    <h1 class="text-2xl font-bold text-center">{{ program }}</h1>
     <div class="w-full border-t border-black mb-4 md:mb-8"></div>
 
-    <app-workout-card *ngFor="let workout of workouts" class="w-full md:w-2/5" [programName]="programName"
-        [workout]="workout"></app-workout-card>
+    <app-workout-card *ngFor="let workout of workouts; index as i" class="w-full md:w-2/5" [program]="program"
+        [workoutIndex]="i" [workout]="workout"></app-workout-card>
 </div>

@@ -22,8 +22,8 @@ const routes: Routes = [
   { path: 'food-new', component: FoodNewComponent, canActivate: [AuthGuard] },
   { path: 'food-edit/:name', component: FoodEditComponent, canActivate: [AuthGuard] },
   { path: 'programs', component: ProgramListComponent, canActivate: [AuthGuard] },
-  { path: 'program/:name', component: WorkoutListComponent, canActivate: [AuthGuard] },
-  { path: 'workout/:programName/:workoutName', component: ExerciseListComponent, canActivate: [AuthGuard] }
+  { path: 'program/:program', component: WorkoutListComponent, canActivate: [AuthGuard] },
+  { path: 'workout/:program/:workout', component: ExerciseListComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -8,7 +8,8 @@ import { Workout } from '../../../models/workout';
 })
 
 export class WorkoutCardComponent {
-  @Input() public programName!: string;
+  @Input() public program!: string;
+  @Input() public workoutIndex!: number;
   @Input() public workout!: Workout;
 
   constructor() { }
