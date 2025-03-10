@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Workout } from '../../../models/workout';
+import { WorkoutService } from '../../../services/workout.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workout-card',
@@ -12,5 +14,16 @@ export class WorkoutCardComponent {
   @Input() public workoutIndex!: number;
   @Input() public workout!: Workout;
 
-  constructor() { }
+  constructor(
+    private workoutService: WorkoutService,
+    private router: Router
+  ) { }
+
+  public onDelete(): void {
+    if (confirm('Supprimer ' + this.workout.getName() + ' ?')) {
+      this.workoutService.deleteWorkout(this.program, this.workout).then(() => {
+        this.router.navigate(['/']);
+      });
+    }
+  }
 }

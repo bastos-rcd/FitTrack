@@ -66,4 +66,24 @@ export class WorkoutService {
       console.error('Error creating workout:', error);
     }
   }
+
+  public async deleteWorkout(program: string, workout: Workout): Promise<void> {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'programs'));
+      querySnapshot.forEach((docProgram) => {
+        const dataProgram = docProgram.data();
+
+        if (dataProgram['name'] === program) {
+          const workouts = dataProgram['workouts'].filter((workoutData: any) => workoutData['name'] !== workout.getName());
+
+          updateDoc(docProgram.ref, {
+            name: dataProgram['name'],
+            workouts: workouts
+          });
+        }
+      });
+    } catch (error) {
+      console.error('Error deleting workout:', error);
+    }
+  }
 }

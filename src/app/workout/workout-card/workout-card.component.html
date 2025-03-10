@@ -1,6 +1,15 @@
-<a routerLink="/workout/{{ program }}/{{ workoutIndex }}">
-    <div class="flex flex-col items-center text-base bg-slate-300 rounded-xl p-2 md:p-4 gap-y-2 md:gap-y-4">
-        <h1 class="font-semibold">{{ workout.getName() }}</h1>
-        <span>{{ workout.getExercises().length}} exercices</span>
+<div class="flex flex-col items-center text-base bg-slate-300 rounded-xl p-2 md:p-4 gap-y-2 md:gap-y-4">
+    <div class="w-full flex flex-row items-center gap-x-2 md:gap-x-4">
+        <h1 class="w-full text-center font-semibold">{{ workout.getName() }}</h1>
+
+        <a routerLink="/workout/{{ program }}/{{ workoutIndex }}" class="py-1 px-2 rounded-xl bg-blue-300">
+            <i class="fa-solid fa-eye"></i>
+        </a>
+
+        <button (click)="onDelete()" class="py-1 px-2 rounded-xl bg-rose-300">
+            <i class="fa-solid fa-trash"></i>
+        </button>
     </div>
-</a>
+
+    <span>{{ workout.getExercises().length}} exercices</span>
+</div>
