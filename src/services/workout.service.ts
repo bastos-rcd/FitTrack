@@ -50,10 +50,7 @@ export class WorkoutService {
       querySnapshot.forEach((docProgram) => {
         const dataProgram = docProgram.data();
 
-        console.log(dataProgram['name'] + ' et ' + programName);
-
         if (dataProgram['name'] === programName as string) {
-          console.log(dataProgram['workouts']);
           dataProgram['workouts'].push({
             name: workout.getName(),
             exercises: workout.getExercises()
