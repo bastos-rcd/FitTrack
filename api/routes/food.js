@@ -35,9 +35,33 @@ router.get('/', async (req, res) => {
             foods: data
         });
     } catch (error) {
-        console.error(error);
         res.status(500).json({ error: error.message });
     }
 })
+
+// GET food
+router.get('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const response = await axios.get(GITHUB_API_URL, {
+            headers: {
+                Authorization: `token ${GITHUB_TOKEN}`
+            }
+        });
+
+        const file = response.data.find((file) => file.name === `${id}.json`);
+
+        if (!file) {
+            return res.status(404).json({ error: 'Food not found' });
+        }
+
+        const data = await axios.get(file.download_url);
+
+        res.json(data.data);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 export default router;
