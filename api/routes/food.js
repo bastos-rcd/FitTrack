@@ -107,4 +107,45 @@ router.post('/', async (req, res) => {
     }
 });
 
+// DELETE food
+router.delete('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        let fileResponse;
+        try {
+            fileResponse = await axios.get(`${GITHUB_API_URL}/${id}.json?ref=${BRANCH}&nocache=${Date.now()}`, {
+                headers: {
+                    Authorization: `token ${GITHUB_TOKEN}`,
+                    'Cache-Control': 'no-cache'
+                }
+            });
+        } catch (error) {
+            return res.status(404).json({ error: 'Food not found' });
+        }
+
+        const response = await axios.delete(`${GITHUB_API_URL}/${id}.json`, {
+            headers: {
+                Authorization: `token ${GITHUB_TOKEN}`,
+                Accept: 'application/vnd.github.v3+json'
+            },
+            data: {
+                message: `Delete ${id}.json`,
+                sha: fileResponse.data.sha,
+                branch: BRANCH
+            }
+        });
+
+        res.json({
+            message: `Food ${id} deleted`
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 export default router;
