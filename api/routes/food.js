@@ -11,42 +11,45 @@ const OWNER = process.env.OWNER;
 const REPO = process.env.REPO;
 const BRANCH = process.env.BRANCH;
 const FOLDER_PATH = "foods";
-const GITHUB_API_URL = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FOLDER_PATH}?ref=${BRANCH}`;
+const GITHUB_API_URL = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FOLDER_PATH}`;
 
-// GET all foods
+// READ all foods
 router.get('/', async (req, res) => {
     try {
-        const response = await axios.get(GITHUB_API_URL, {
+        const response = await axios.get(`${GITHUB_API_URL}?ref=${BRANCH}&nocache=${Date.now()}`, {
             headers: {
-                Authorization: `token ${GITHUB_TOKEN}`
+                Authorization: `token ${GITHUB_TOKEN}`,
+                'Cache-Control': 'no-cache'
             }
         });
 
         const files = response.data.filter((file) => file.name.endsWith('.json'));
 
         const promises = files.map(async (file) => {
-            const content = await axios.get(file.download_url);
+            const content = await axios.get(`${file.download_url}?nocache=${Date.now()}`);
             return { filename: file.name, content: content.data };
         });
 
         const data = await Promise.all(promises);
 
         res.json({
-            foods: data
+            nbFoods: data.length,
+            foods: data.map((food) => food.content)
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-})
+});
 
-// GET food
+// READ food
 router.get('/:id', async (req, res) => {
-    const { id } = req.params;
-
     try {
-        const response = await axios.get(GITHUB_API_URL, {
+        const { id } = req.params;
+
+        const response = await axios.get(`${GITHUB_API_URL}?ref=${BRANCH}&nocache=${Date.now()}`, {
             headers: {
-                Authorization: `token ${GITHUB_TOKEN}`
+                Authorization: `token ${GITHUB_TOKEN}`,
+                'Cache-Control': 'no-cache'
             }
         });
 
@@ -56,9 +59,49 @@ router.get('/:id', async (req, res) => {
             return res.status(404).json({ error: 'Food not found' });
         }
 
-        const data = await axios.get(file.download_url);
+        const data = await axios.get(`${file.download_url}?nocache=${Date.now()}`);
 
         res.json(data.data);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// CREATE food
+router.post('/', async (req, res) => {
+    try {
+        const { id, name, calories, proteins, carbs, fats } = req.body;
+
+        if (!id || !name || !calories || !proteins || !carbs || !fats) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        const content = JSON.stringify({
+            id,
+            name,
+            calories,
+            proteins,
+            carbs,
+            fats
+        }, null, 2);
+        const contentBase64 = Buffer.from(content).toString('base64');
+
+        const response = await axios.put(
+            `${GITHUB_API_URL}/${id}.json`,
+            {
+                message: `Create ${id}.json`,
+                content: contentBase64,
+                branch: BRANCH
+            }, {
+            headers: {
+                Authorization: `token ${GITHUB_TOKEN}`,
+                Accept: 'application/vnd.github.v3+json'
+            }
+        });
+
+        res.json({
+            message: `Food ${id} created`
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
