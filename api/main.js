@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-const PORT = process.env.PORT || 8008;
+const PORT = process.env.PORT || 8080;
 
 app.use('/api/foods', food);
 
