@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
 })
 
 export class FoodGetComponent {
+  public isLoaded = false;
+  public isErrored = false;
+
   public meal: Observable<Meal>;
   public food: Food | undefined;
   public foods: Food[] = [];
@@ -25,17 +28,26 @@ export class FoodGetComponent {
     private router: Router
   ) {
     this.meal = this.mealStore.meal$;
-    this.foodService.getFoods().then((foods) => {
-      this.foods = foods;
+    this.foodService.getFoods().subscribe({
+      next: (data) => {
+        this.foods = data.foods;
+        this.isLoaded = true;
+      },
+      error: (error) => {
+        console.error('Error loading foods', error);
+        this.isLoaded = true;
+        this.isErrored = true;
+      }
     });
   }
 
   public onSubmit() {
     if (this.model.foodName && this.model.portion) {
-      const tempFood = this.foods.find((f) => f.getName() === this.model.foodName)!;
+      const tempFood = this.foods.find((f) => f.name === this.model.foodName)!;
       const tempPortion = tempFood.getMacros(this.model.portion);
       this.food = new Food(
-        tempFood.getName(),
+        tempFood.id,
+        tempFood.name,
         tempPortion.calories,
         tempPortion.proteins,
         tempPortion.carbs,

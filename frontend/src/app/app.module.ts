@@ -14,7 +14,6 @@ import { FoodCardComponent } from './food/food-card/food-card.component';
 import { FoodGetComponent } from './food/food-get/food-get.component';
 import { FoodListComponent } from './food/food-list/food-list.component';
 import { FoodNewComponent } from './food/food-new/food-new.component';
-import { FoodEditComponent } from './food/food-edit/food-edit.component';
 import { ProgramListComponent } from './program/program-list/program-list.component';
 import { ProgramCardComponent } from './program/program-card/program-card.component';
 import { WorkoutListComponent } from './workout/workout-list/workout-list.component';
@@ -24,6 +23,8 @@ import { ExerciseCardComponent } from './exercise/exercise-card/exercise-card.co
 import { ProgramNewComponent } from './program/program-new/program-new.component';
 import { WorkoutNewComponent } from './workout/workout-new/workout-new.component';
 import { ExerciseNewComponent } from './exercise/exercise-new/exercise-new.component';
+import { CardLoadingComponent } from './card/card-loading/card-loading.component';
+import { CardErrorComponent } from './card/card-error/card-error.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,6 @@ import { ExerciseNewComponent } from './exercise/exercise-new/exercise-new.compo
     FoodGetComponent,
     FoodListComponent,
     FoodNewComponent,
-    FoodEditComponent,
     ProgramListComponent,
     ProgramCardComponent,
     WorkoutListComponent,
@@ -45,7 +45,9 @@ import { ExerciseNewComponent } from './exercise/exercise-new/exercise-new.compo
     ExerciseCardComponent,
     ProgramNewComponent,
     WorkoutNewComponent,
-    ExerciseNewComponent
+    ExerciseNewComponent,
+    CardLoadingComponent,
+    CardErrorComponent
   ],
   imports: [
     BrowserModule,

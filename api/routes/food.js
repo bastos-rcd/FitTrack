@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
         const data = await Promise.all(promises);
 
         res.json({
-            nbFoods: data.length,
+            nbFoods: data.at(-1).content.id + 1,
             foods: data.map((food) => food.content)
         });
     } catch (error) {
@@ -46,6 +46,8 @@ router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
+        const myId = Number(id);
+
         const response = await axios.get(`${GITHUB_API_URL}?ref=${BRANCH}&nocache=${Date.now()}`, {
             headers: {
                 Authorization: `token ${GITHUB_TOKEN}`,
@@ -53,7 +55,7 @@ router.get('/:id', async (req, res) => {
             }
         });
 
-        const file = response.data.find((file) => file.name === `${id}.json`);
+        const file = response.data.find((file) => file.name === `${myId}.json`);
 
         if (!file) {
             return res.status(404).json({ error: 'Food not found' });
@@ -72,12 +74,14 @@ router.post('/', async (req, res) => {
     try {
         const { id, name, calories, proteins, carbs, fats } = req.body;
 
+
         if (!id || !name || !calories || !proteins || !carbs || !fats) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
+        const myId = Number(id);
         const content = JSON.stringify({
-            id,
+            id: myId,
             name,
             calories,
             proteins,
@@ -116,9 +120,10 @@ router.delete('/:id', async (req, res) => {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
+        const myId = Number(id);
         let fileResponse;
         try {
-            fileResponse = await axios.get(`${GITHUB_API_URL}/${id}.json?ref=${BRANCH}&nocache=${Date.now()}`, {
+            fileResponse = await axios.get(`${GITHUB_API_URL}/${myId}.json?ref=${BRANCH}&nocache=${Date.now()}`, {
                 headers: {
                     Authorization: `token ${GITHUB_TOKEN}`,
                     'Cache-Control': 'no-cache'
@@ -128,20 +133,20 @@ router.delete('/:id', async (req, res) => {
             return res.status(404).json({ error: 'Food not found' });
         }
 
-        const response = await axios.delete(`${GITHUB_API_URL}/${id}.json`, {
+        const response = await axios.delete(`${GITHUB_API_URL}/${myId}.json`, {
             headers: {
                 Authorization: `token ${GITHUB_TOKEN}`,
                 Accept: 'application/vnd.github.v3+json'
             },
             data: {
-                message: `Delete ${id}.json`,
+                message: `Delete ${myId}.json`,
                 sha: fileResponse.data.sha,
                 branch: BRANCH
             }
         });
 
         res.json({
-            message: `Food ${id} deleted`
+            message: `Food ${myId} deleted`
         });
     } catch (error) {
         res.status(500).json({ error: error.message });

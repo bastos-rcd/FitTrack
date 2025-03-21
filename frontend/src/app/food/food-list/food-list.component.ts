@@ -10,25 +10,55 @@ import { Router } from '@angular/router';
 })
 
 export class FoodListComponent {
+  public isLoaded = false;
+  public isErrored = false;
+
   public foods: Food[] = [];
+  public nbFoods: number = 0;
 
   constructor(
     private foodService: FoodService,
     private router: Router
   ) {
-    this.foodService.getFoods().then((foods) => {
-      this.foods = foods;
-      this.foods.sort((a, b) => a.getName().localeCompare(b.getName()));
+    this.foodService.getFoods().subscribe({
+      next: (data) => {
+        this.foods = data.foods;
+        this.nbFoods = data.nbFoods;
+        console.log(this.foods);
+        this.foods.sort((a, b) => a.name.localeCompare(b.name));
+        this.isLoaded = true;
+      },
+      error: (error) => {
+        console.error('Error loading foods', error);
+        this.isLoaded = true;
+        this.isErrored = true;
+      }
     });
   }
 
-  public onDeleteFood(_name: string): void {
-    if (confirm('Supprimer ' + _name + ' ?')) {
-      this.foodService.deleteFood(_name).then(() => {
-        this.foodService.getFoods().then((foods) => {
-          this.foods = foods;
-          this.foods.sort((a, b) => a.getName().localeCompare(b.getName()));
-        });
+  public onDeleteFood(_id: number): void {
+    if (confirm('Supprimer ?')) {
+      this.foodService.deleteFood(_id).subscribe({
+        next: () => {
+          this.isLoaded = false;
+          this.foodService.getFoods().subscribe({
+            next: (data) => {
+              console.log(data);
+              this.foods = data.foods;
+              this.nbFoods = data.nbFoods;
+              this.foods.sort((a, b) => a.name.localeCompare(b.name));
+              this.isLoaded = true;
+            },
+            error: (error) => {
+              console.error('Error loading foods', error);
+              this.isLoaded = true;
+              this.isErrored = true;
+            }
+          });
+        },
+        error: (error) => {
+          console.error('Error deleting food', error);
+        }
       });
     }
   }

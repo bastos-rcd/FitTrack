@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FoodService } from '../../../services/food.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Food } from '../../../models/food';
 
 @Component({
@@ -14,7 +14,8 @@ export class FoodNewComponent {
 
   constructor(
     private foodService: FoodService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   public onSubmit(): void {
@@ -25,17 +26,27 @@ export class FoodNewComponent {
       this.model.carbs &&
       this.model.fats
     ) {
-      this.foodService.createFood(
-        new Food(
-          this.model.name,
-          this.model.calories,
-          this.model.proteins,
-          this.model.carbs,
-          this.model.fats
-        )
-      );
+      this.route.params.subscribe((params) => {
+        this.model.id = params['id'];
 
-      this.router.navigate(['/foods']);
+        this.foodService.createFood(
+          new Food(
+            this.model.id,
+            this.model.name,
+            this.model.calories,
+            this.model.proteins,
+            this.model.carbs,
+            this.model.fats
+          )
+        ).subscribe({
+          next: () => {
+            this.router.navigate(['/foods']);
+          },
+          error: (error) => {
+            console.error('Error creating food', error);
+          }
+        });
+      });
     }
   }
 }

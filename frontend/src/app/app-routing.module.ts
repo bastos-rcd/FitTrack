@@ -8,7 +8,6 @@ import { CalculatorComponent } from './calculator/calculator.component';
 import { FoodGetComponent } from './food/food-get/food-get.component';
 import { FoodListComponent } from './food/food-list/food-list.component';
 import { FoodNewComponent } from './food/food-new/food-new.component';
-import { FoodEditComponent } from './food/food-edit/food-edit.component';
 import { ProgramListComponent } from './program/program-list/program-list.component';
 import { WorkoutListComponent } from './workout/workout-list/workout-list.component';
 import { ExerciseListComponent } from './exercise/exercise-list/exercise-list.component';
@@ -22,8 +21,7 @@ const routes: Routes = [
   { path: 'calculator', component: CalculatorComponent, canActivate: [AuthGuard] },
   { path: 'food-get', component: FoodGetComponent, canActivate: [AuthGuard] },
   { path: 'foods', component: FoodListComponent, canActivate: [AuthGuard] },
-  { path: 'food-new', component: FoodNewComponent, canActivate: [AuthGuard] },
-  { path: 'food-edit/:name', component: FoodEditComponent, canActivate: [AuthGuard] },
+  { path: 'food-new/:id', component: FoodNewComponent, canActivate: [AuthGuard] },
   { path: 'programs', component: ProgramListComponent, canActivate: [AuthGuard] },
   { path: 'program/:program', component: WorkoutListComponent, canActivate: [AuthGuard] },
   { path: 'workout/:program/:workout', component: ExerciseListComponent, canActivate: [AuthGuard] },
