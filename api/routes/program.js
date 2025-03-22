@@ -56,4 +56,41 @@ router.get('/', async (req, res) => {
     }
 });
 
+// CREATE program
+router.post('/', async (req, res) => {
+    try {
+        const { id, name } = req.body;
+
+        if (!id || !name) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        const myId = Number(id);
+        const content = JSON.stringify({
+            id: myId,
+            name
+        });
+        const contentBase64 = Buffer.from(content).toString('base64');
+
+        const response = await axios.put(
+            `${GITHUB_API_URL}/${myId}/info.json`,
+            {
+                message: `Create program ${myId}`,
+                content: contentBase64,
+                branch: BRANCH
+            }, {
+            headers: {
+                Authorization: `token ${GITHUB_TOKEN}`,
+                Accept: 'application/vnd.github.v3+json'
+            }
+        });
+
+        res.json({
+            message: `Program ${myId} created`
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 export default router;
