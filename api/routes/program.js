@@ -93,4 +93,46 @@ router.post('/', async (req, res) => {
     }
 });
 
+// DELETE program
+router.delete('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        const myId = Number(id);
+        let fileResponse;
+        try {
+            fileResponse = await axios.get(`${GITHUB_API_URL}/${myId}/info.json?ref=${BRANCH}`, {
+                headers: {
+                    Authorization: `token ${GITHUB_TOKEN}`,
+                    'Cache-Control': 'no-cache'
+                }
+            });
+        } catch (error) {
+            return res.status(404).json({ error: 'Program not found' });
+        }
+
+        const response = await axios.delete(`${GITHUB_API_URL}/${myId}/info.json`, {
+            headers: {
+                Authorization: `token ${GITHUB_TOKEN}`,
+                Accept: 'application/vnd.github.v3+json'
+            },
+            data: {
+                message: `Delete program ${myId}`,
+                sha: fileResponse.data.sha,
+                branch: BRANCH
+            }
+        });
+
+        res.json({
+            message: `Program ${myId} deleted`
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 export default router;
