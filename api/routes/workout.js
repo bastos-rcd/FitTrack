@@ -62,4 +62,41 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// CREATE workout
+router.post('/:idProg', async (req, res) => {
+    try {
+        const { idProg } = req.params;
+        const { id, name } = req.body;
+
+        if (!idProg || !id || !name) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        const myId = Number(id);
+        const content = JSON.stringify({
+            id: myId,
+            name
+        });
+        const contentBase64 = Buffer.from(content).toString('base64');
+
+        const response = await axios.put(
+            `${GITHUB_API_URL}/${idProg}/${FOLDER_PATH}/${id}/info.json`, {
+            message: `Create workout ${id}`,
+            content: contentBase64,
+            branch: BRANCH
+        }, {
+            headers: {
+                Authorization: `token ${GITHUB_TOKEN}`,
+                Accept: 'application/vnd.github.v3+json'
+            }
+        });
+
+        res.json({
+            message: `Workout ${id} created`
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 export default router;
